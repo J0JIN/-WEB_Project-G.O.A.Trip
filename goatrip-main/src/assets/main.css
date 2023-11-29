@@ -1,0 +1,34 @@
+@import "./base.css";
+
+@font-face {
+  font-family: "nsBold";
+  src: url(fonts/NanumSquareB.ttf);
+}
+@font-face {
+  font-family: "nsEBold";
+  src: url(fonts/NanumSquareEB.ttf);
+}
+@font-face {
+  font-family: "nsLight";
+  src: url(fonts/NanumSquareL.ttf);
+}
+@font-face {
+  font-family: "nsRegular";
+  src: url(fonts/NanumSquareR.ttf);
+}
+@font-face {
+  font-family: "HSBombaram";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/HSBombaram.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.Title {
+  background-color: var(--light);
+  padding: 20px 10px 10px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid rgb(0, 0, 0);
+  border-radius: 3%;
+  font-family: "nsBold";
+}

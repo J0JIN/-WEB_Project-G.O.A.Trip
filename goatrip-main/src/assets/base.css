@@ -1,0 +1,19 @@
+:root {
+  /* --theme1: #eeb2ab; */
+  --theme1: #f28627;
+
+  /* --theme2: #eeb2ab; */
+  --theme2: #089071;
+  --theme3: #000000;
+  /* --theme3: #33302f; */
+  --theme4: #e4e4e4;
+  --light: #f8f7f2;
+  /* --gray: rgb(133, 133, 133); */
+
+  /* --theme1: #c10016;
+  --theme2: #9a7f62;
+  --theme3: #2d2926;
+  --theme4: #f9e267;
+  --light: #f8f7f2; */
+  --modalback: #0000006c;
+}

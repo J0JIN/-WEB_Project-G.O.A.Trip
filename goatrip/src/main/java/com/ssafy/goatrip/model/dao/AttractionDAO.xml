@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.goatrip.model.dao.AttractionDAO">
+
+
+	<select id="getEndAttr"
+		resultType="com.ssafy.goatrip.model.dto.AttractionDTO">
+		<![CDATA[  select ai.content_id as content_id, title, addr1, first_image, latitude, longitude, overview
+    from attraction_info ai
+    left join attraction_description ad on ai.content_id = ad.content_id
+    where ST_DISTANCE_SPHERE(POINT(#{start_long}, #{start_lat}), POINT(ai.longitude, ai.latitude)) <= #{max_dist}
+    and ST_DISTANCE_SPHERE(POINT(#{start_long}, #{start_lat}), POINT(ai.longitude, ai.latitude)) >= #{min_dist}
+    order by ST_DISTANCE_SPHERE(POINT(#{start_long}, #{start_lat}), POINT(ai.longitude, ai.latitude))
+    ]]>
+	</select>
+
+
+	<select id="getMidAttr"
+		resultType="com.ssafy.goatrip.model.dto.AttractionDTO">
+		<![CDATA[  select ai.content_id as content_id, title, addr1, first_image, latitude, longitude, overview
+    from attraction_info ai
+    left join attraction_description ad on ai.content_id = ad.content_id
+    where ST_DISTANCE_SPHERE(POINT(#{midlong}, #{midlat}), POINT(ai.longitude, ai.latitude))< #{radius}
+    order by ST_DISTANCE_SPHERE(POINT(#{midlong}, #{midlat}), POINT(ai.longitude, ai.latitude))
+    ]]>
+	</select>
+</mapper>

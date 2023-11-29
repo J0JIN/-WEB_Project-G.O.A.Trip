@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.goatrip.model.dao.ScheduleDAO">
+
+	<insert id="registerSchedule"
+		parameterType="com.ssafy.goatrip.model.dto.ScheduleDTO" keyProperty="sch_id" keyColumn="sch_id" useGeneratedKeys="true">
+		insert into
+		schedule(sch_name,user_id,create_date,start_lat,start_long)
+		values(#{sch_name},#{user_id},now(),#{start_lat},#{start_long});
+		
+	</insert>
+
+	<insert id="registerStopover"
+		parameterType="com.ssafy.goatrip.model.dto.ScheduleDTO">
+		insert into stopover(sch_id, content_id)
+		values
+		<foreach collection="stopover" item="attr" separator=" , ">
+			(#{sch_id},#{attr.content_id})
+		</foreach>
+	</insert>
+
+	<select id="getScheduleList" resultType="com.ssafy.goatrip.model.dto.ScheduleDTO">
+		select * from schedule
+		where user_id = #{user_id} 
+		order by create_date desc
+		limit 4;
+	</select>
+	
+	<select id="getStopoverList" resultType="com.ssafy.goatrip.model.dto.AttractionDTO">
+		select * from stopover sp left join 
+	(select ai.content_id as content_id, title, addr1, first_image, latitude, longitude, overview
+    from attraction_info ai left join attraction_description ad on ai.content_id = ad.content_id) as attr
+		on sp.content_id = attr.content_id
+		where sch_id=#{sch_id};
+	</select>
+
+	<delete id="deleteStopover">
+		delete from stopover
+		where sch_id = #{sch_id}
+	</delete>
+	
+	<delete id="deleteSchedule">
+		delete
+		from schedule
+		where sch_id =#{sch_id}
+	</delete>
+
+
+</mapper>
